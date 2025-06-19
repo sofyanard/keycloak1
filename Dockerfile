@@ -1,5 +1,5 @@
 # Use the official .NET SDK image for build
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
 # Copy csproj and restore as distinct layers
@@ -13,7 +13,7 @@ COPY . .
 RUN dotnet publish ./keycloak1.csproj -c Release -o /app/publish --no-restore
 
 # Use the official ASP.NET runtime image for the final stage
-FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
